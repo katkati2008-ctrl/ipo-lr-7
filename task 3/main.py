@@ -12,51 +12,11 @@ operations_count = 0
 # Функции запрещены, поэтому весь код в основном блоке
 
 # Загрузка данных из файла
+cars=[]
 if os.path.exists(DATA_FILE):
     with open(DATA_FILE, 'r', encoding='utf-8') as file:
         cars = json.load(file)
-else:
-    # Если файл не существует, используем начальные данные
-    cars = [
-        {
-            "id": 1,
-            "name": "Aventador",
-            "manufacturer": "Lamborgini",
-            "is_petrol": True,
-            "tank_volume": 90
-        },
-        {
-            "id": 2,
-            "name": "A8",
-            "manufacturer": "Audi",
-            "is_petrol": True,
-            "tank_volume": 72
-        },
-        {
-            "id": 3,
-            "name": "X3",
-            "manufacturer": "BMW",
-            "is_petrol": True,
-            "tank_volume": 65
-        },
-        {
-            "id": 4,
-            "name": "Armada",
-            "manufacturer": "Nissan",
-            "is_petrol": True,
-            "tank_volume": 98
-        },
-        {
-            "id": 5,
-            "name": "Venza",
-            "manufacturer": "Toyota",
-            "is_petrol": True,
-            "tank_volume": 55
-        }
-    ]
-    # Сохраняем начальные данные в файл
-    with open(DATA_FILE, 'w', encoding='utf-8') as file:
-        json.dump(cars, file, indent=2, ensure_ascii=False)
+
 
 # Главный цикл программы
 while True:
