@@ -1,14 +1,13 @@
 #Мазалевская Вариант 4
-print(f"start code...")
-import json
-import os
+print(f"start code...") 
+import json 
+import os 
 
-# Имя файла для хранения данных
-DATA_FILE = "CarInfo.json"
+DATA_FILE = "CarInfo.json" 
 
-# Количество выполненных операций
-operations_count = 0
+operations_count = 0 
 
+<<<<<<< HEAD
 # Функции запрещены, поэтому весь код в основном блоке
 
 # Загрузка данных из файла
@@ -19,6 +18,11 @@ if os.path.exists(DATA_FILE):
 
 
 # Главный цикл программы
+=======
+if os.path.exists(DATA_FILE):
+    with open(DATA_FILE, 'r', encoding='utf-8') as file:
+        cars = json.load(file)
+>>>>>>> c89b3d7248ed19168616e138442f80118e453996
 while True:
     print("\n" + "=" * 40)
     print("МЕНЮ УПРАВЛЕНИЯ БАЗОЙ ДАННЫХ АВТОМОБИЛЕЙ")
@@ -34,7 +38,6 @@ while True:
         choice = input("Выберите пункт меню (1-5): ").strip()
         
         if choice == "1":
-            # Вывод всех записей
             print("\n" + "=" * 60)
             print("ВСЕ ЗАПИСИ ОБ АВТОМОБИЛЯХ")
             print("=" * 60)
@@ -55,7 +58,6 @@ while True:
             operations_count += 1
         
         elif choice == "2":
-            # Вывод записи по ID
             try:
                 search_id = int(input("Введите ID автомобиля для поиска: "))
                 found = False
@@ -76,7 +78,7 @@ while True:
                         break
                 
                 if not found:
-                    print(f"\n⚠ ВНИМАНИЕ: Запись с ID {search_id} не найдена!")
+                    print(f"\nЗапись с ID {search_id} не найдена!")
                 else:
                     operations_count += 1
                     
@@ -84,15 +86,12 @@ while True:
                 print("Ошибка: ID должен быть числом!")
         
         elif choice == "3":
-            # Добавление новой записи
             print("\n" + "=" * 40)
             print("ДОБАВЛЕНИЕ НОВОЙ ЗАПИСИ")
             print("=" * 40)
             
             try:
                 new_id = int(input("Введите ID новой записи: "))
-                
-                # Проверка на уникальность ID
                 id_exists = False
                 for car in cars:
                     if car["id"] == new_id:
@@ -110,7 +109,6 @@ while True:
                     
                     tank_volume = int(input("Введите объем бака (в литрах): "))
                     
-                    # Создание новой записи
                     new_car = {
                         "id": new_id,
                         "name": name,
@@ -119,10 +117,8 @@ while True:
                         "tank_volume": tank_volume
                     }
                     
-                    # Добавление в список
                     cars.append(new_car)
-                    
-                    # Сохранение в файл
+                  
                     with open(DATA_FILE, 'w', encoding='utf-8') as file:
                         json.dump(cars, file, indent=2, ensure_ascii=False)
                     
@@ -133,12 +129,11 @@ while True:
                 print(f"Ошибка ввода данных: {e}")
         
         elif choice == "4":
-            # Удаление записи по ID
+           
             try:
                 delete_id = int(input("Введите ID записи для удаления: "))
-                found_index = -1
-                
-                # Поиск индекса записи
+                found_index = -1 
+               
                 for i, car in enumerate(cars):
                     if car["id"] == delete_id:
                         found_index = i
@@ -146,8 +141,7 @@ while True:
                 
                 if found_index == -1:
                     print(f"\nЗапись с ID {delete_id} не найдена!")
-                else:
-                    # Вывод информации об удаляемой записи
+                else: 
                     car_to_delete = cars[found_index]
                     print("\n" + "=" * 40)
                     print("УДАЛЕНИЕ ЗАПИСИ")
@@ -162,23 +156,19 @@ while True:
                     confirm = input("\nВы уверены, что хотите удалить эту запись? (да/нет): ").strip().lower()
                     
                     if confirm in ["да", "yes", "y", "д"]:
-                        # Удаление записи
+                       
                         del cars[found_index]
                         
-                        # Сохранение в файл
                         with open(DATA_FILE, 'w', encoding='utf-8') as file:
                             json.dump(cars, file, indent=2, ensure_ascii=False)
                         
                         print(f"Запись с ID {delete_id} успешно удалена!")
                         operations_count += 1
                     else:
-                        print("Удаление отменено.")
-                        
+                        print("Удаление отменено.")           
             except ValueError:
                 print("Ошибка: ID должен быть числом!")
-        
         elif choice == "5":
-            # Выход из программы
             print("\n" + "=" * 40)
             print("ЗАВЕРШЕНИЕ РАБОТЫ ПРОГРАММЫ")
             print("=" * 40)
@@ -188,11 +178,9 @@ while True:
         
         else:
             print("Неверный выбор. Пожалуйста, выберите пункт от 1 до 5.")
-    
     except KeyboardInterrupt:
         print("\n\nПрограмма прервана пользователем.")
         break
     except Exception as e:
         print(f"Произошла ошибка: {e}")
-
 print(f"end code...")
