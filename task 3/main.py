@@ -16,8 +16,8 @@ if os.path.exists(DATA_FILE):
 
 
 while True:
-    print("\n" + "=" * 40)
-    print("МЕНЮ УПРАВЛЕНИЯ БАЗОЙ ДАННЫХ АВТОМОБИЛЕЙ")
+    print("\n" + "=" * 30)
+    print("Данные автомобилей")
     print("=" * 40)
     print("1. Вывести все записи")
     print("2. Вывести запись по полю (id)")
@@ -27,11 +27,11 @@ while True:
     print("-" * 40)
     
     try:
-        choice = input("Выберите пункт меню (1-5): ").strip()
+        choice = input("Выберите пункт (1-5): ").strip()
         
         if choice == "1":
             print("\n" + "=" * 60)
-            print("ВСЕ ЗАПИСИ ОБ АВТОМОБИЛЯХ")
+            print("Все данные об автомобилях")
             print("=" * 60)
             
             if not cars:
@@ -51,13 +51,13 @@ while True:
         
         elif choice == "2":
             try:
-                search_id = int(input("Введите ID автомобиля для поиска: "))
+                search_id = int(input("Введите ID автомобиля: "))
                 found = False
                 
                 for i, car in enumerate(cars):
                     if car["id"] == search_id:
                         print("\n" + "=" * 50)
-                        print("НАЙДЕННАЯ ЗАПИСЬ")
+                        print("Данные об автомобиле")
                         print("=" * 50)
                         print(f"Позиция в базе данных: {i + 1}")
                         fuel_type = "бензин" if car["is_petrol"] else "не бензин"
@@ -79,7 +79,7 @@ while True:
         
         elif choice == "3":
             print("\n" + "=" * 40)
-            print("ДОБАВЛЕНИЕ НОВОЙ ЗАПИСИ")
+            print("Добавление записи")
             print("=" * 40)
             
             try:
@@ -91,13 +91,13 @@ while True:
                         break
                 
                 if id_exists:
-                    print(f"Ошибка: Запись с ID {new_id} уже существует!")
+                    print(f"Запись с ID {new_id} уже существует")
                 else:
                     name = input("Введите название модели: ").strip()
                     manufacturer = input("Введите производителя: ").strip()
                     
                     fuel_input = input("Заправляется бензином? (да/нет): ").strip().lower()
-                    is_petrol = fuel_input in ["да", "yes", "y", "д"]
+                    is_petrol = fuel_input in ["да"]
                     
                     tank_volume = int(input("Введите объем бака (в литрах): "))
                     
@@ -114,7 +114,7 @@ while True:
                     with open(DATA_FILE, 'w', encoding='utf-8') as file:
                         json.dump(cars, file, indent=2, ensure_ascii=False)
                     
-                    print(f"Запись с ID {new_id} успешно добавлена!")
+                    print(f"Запись с ID {new_id} добавлена")
                     operations_count += 1
                     
             except ValueError as e:
@@ -136,7 +136,7 @@ while True:
                 else: 
                     car_to_delete = cars[found_index]
                     print("\n" + "=" * 40)
-                    print("УДАЛЕНИЕ ЗАПИСИ")
+                    print("Удаление записи")
                     print("=" * 40)
                     fuel_type = "бензин" if car_to_delete["is_petrol"] else "не бензин"
                     print(f"ID: {car_to_delete['id']}")
@@ -147,25 +147,24 @@ while True:
                     
                     confirm = input("\nВы уверены, что хотите удалить эту запись? (да/нет): ").strip().lower()
                     
-                    if confirm in ["да", "yes", "y", "д"]:
+                    if confirm in ["да"]:
                        
                         del cars[found_index]
                         
                         with open(DATA_FILE, 'w', encoding='utf-8') as file:
                             json.dump(cars, file, indent=2, ensure_ascii=False)
                         
-                        print(f"Запись с ID {delete_id} успешно удалена!")
+                        print(f"Запись с ID {delete_id} удалена")
                         operations_count += 1
                     else:
                         print("Удаление отменено.")           
             except ValueError:
-                print("Ошибка: ID должен быть числом!")
+                print("ID должен быть числом")
         elif choice == "5":
             print("\n" + "=" * 40)
-            print("ЗАВЕРШЕНИЕ РАБОТЫ ПРОГРАММЫ")
+            print("Завершение программы")
             print("=" * 40)
             print(f"Количество выполненных операций: {operations_count}")
-            print("До свидания!")
             break
         
         else:
