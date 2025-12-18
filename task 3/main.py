@@ -16,23 +16,23 @@ if os.path.exists(DATA_FILE):
 
 
 while True:
-    print("\n" + "=" * 30)
+    print("\n")
     print("Данные автомобилей")
-    print("=" * 40)
+    print("\n")
     print("1. Вывести все записи")
     print("2. Вывести запись по полю (id)")
     print("3. Добавить запись")
     print("4. Удалить запись по полю (id)")
     print("5. Выйти из программы")
-    print("-" * 40)
+    print("\n")
     
     try:
         choice = input("Выберите пункт (1-5): ").strip()
         
         if choice == "1":
-            print("\n" + "=" * 60)
+            print("\n")
             print("Все данные об автомобилях")
-            print("=" * 60)
+            print("\n")
             
             if not cars:
                 print("База данных пуста.")
@@ -45,7 +45,7 @@ while True:
                     print(f"  Производитель: {car['manufacturer']}")
                     print(f"  Тип топлива: {fuel_type}")
                     print(f"  Объем бака: {car['tank_volume']} л")
-                    print("-" * 30)
+                   print("\n")
             
             operations_count += 1
         
@@ -56,9 +56,9 @@ while True:
                 
                 for i, car in enumerate(cars):
                     if car["id"] == search_id:
-                        print("\n" + "=" * 50)
+                        print("\n")
                         print("Данные об автомобиле")
-                        print("=" * 50)
+                        print("\n")
                         print(f"Позиция в базе данных: {i + 1}")
                         fuel_type = "бензин" if car["is_petrol"] else "не бензин"
                         print(f"ID: {car['id']}")
@@ -70,17 +70,17 @@ while True:
                         break
                 
                 if not found:
-                    print(f"\nЗапись с ID {search_id} не найдена!")
+                    print(f"\nЗапись с ID {search_id} не найдена")
                 else:
                     operations_count += 1
                     
             except ValueError:
-                print("Ошибка: ID должен быть числом!")
+                print("ID должен быть числом")
         
         elif choice == "3":
-            print("\n" + "=" * 40)
+            print("\n")
             print("Добавление записи")
-            print("=" * 40)
+            print("\n")
             
             try:
                 new_id = int(input("Введите ID новой записи: "))
@@ -132,12 +132,12 @@ while True:
                         break
                 
                 if found_index == -1:
-                    print(f"\nЗапись с ID {delete_id} не найдена!")
+                    print(f"\nЗапись с ID {delete_id} не найдена")
                 else: 
                     car_to_delete = cars[found_index]
-                    print("\n" + "=" * 40)
+                    print("\n")
                     print("Удаление записи")
-                    print("=" * 40)
+                    print("\n")
                     fuel_type = "бензин" if car_to_delete["is_petrol"] else "не бензин"
                     print(f"ID: {car_to_delete['id']}")
                     print(f"Модель: {car_to_delete['name']}")
@@ -157,20 +157,20 @@ while True:
                         print(f"Запись с ID {delete_id} удалена")
                         operations_count += 1
                     else:
-                        print("Удаление отменено.")           
+                        print("Удаление отменено")           
             except ValueError:
                 print("ID должен быть числом")
         elif choice == "5":
-            print("\n" + "=" * 40)
+            print("\n")
             print("Завершение программы")
-            print("=" * 40)
+            print("\n")
             print(f"Количество выполненных операций: {operations_count}")
             break
         
         else:
-            print("Неверный выбор. Пожалуйста, выберите пункт от 1 до 5.")
+            print("Неверный выбор. Пожалуйста, выберите пункт от 1 до 5")
     except KeyboardInterrupt:
-        print("\n\nПрограмма прервана пользователем.")
+        print("\n\nПрограмма прервана пользователем")
         break
     except Exception as e:
         print(f"Произошла ошибка: {e}")
